@@ -1,25 +1,24 @@
 /** @format */
 
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCarsThunk } from "./operations";
+import { fetchCarsThunk, loadMoreThunk } from "./operations";
 
 const initialState = {
-  cars: {
-    items: [],
-    isLoading: false,
-    error: null,
-  },
-  filter: "",
+  cars: [],
 };
 
 const carsSlice = createSlice({
-  name: "contactList",
+  name: "carsList",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchCarsThunk.fulfilled, (state, { payload }) => {
-      state.contacts.items = payload;
-    });
+    builder
+      .addCase(fetchCarsThunk.fulfilled, (state, { payload }) => {
+        state.cars = payload;
+      })
+      .addCase(loadMoreThunk.fulfilled, (state, { payload }) => {
+        state.cars = [...state.cars, ...payload];
+      });
   },
 });
 

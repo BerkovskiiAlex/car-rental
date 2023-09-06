@@ -16,7 +16,7 @@ import {
 import storage from "redux-persist/lib/storage";
 
 const persistConfigCars = {
-  key: "posts",
+  key: "cars",
   version: 1,
   storage,
 };
@@ -24,7 +24,7 @@ const persistConfigCars = {
 const persistedReducerContacts = persistReducer(persistConfigCars, carsReducer);
 
 export const store = configureStore({
-  reducer: { phonebook: persistedReducerContacts },
+  reducer: { carsList: persistedReducerContacts },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
