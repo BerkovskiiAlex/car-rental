@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCarsThunk, loadMoreThunk } from "../../Redux/Cars/operations";
 import { getCars } from "../../Redux/Cars/selectors";
 import { StyledCarsListSpan } from "./Catalog.styled";
+import { ReactComponent as Icon } from "../../images/normal.svg";
 
 export const Catalog = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export const Catalog = () => {
       {cars.map((car) => (
         <div key={car.id}>
           <img src={car.img} alt={car.description} width={274} />
+          <Icon style={{ fill: "#ad3535" }} />
           <div>
             <h2>
               {car.make} <span>{car.model}</span>, {car.year}
