@@ -12,7 +12,7 @@ import { persistor, store } from "./Redux/Store.js";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <PersistGate loading={null} persistor={persistor}>
     <Provider store={store}>
-      <BrowserRouter basename="/car-rental">
+      <BrowserRouter>
         <App />
       </BrowserRouter>
     </Provider>
