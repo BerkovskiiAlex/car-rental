@@ -14,6 +14,7 @@ import {
   StyledNormalIcon,
 } from "./Catalog.styled";
 import {
+  addToCarModal,
   addToFavorites,
   removeFromFavorites,
   setIsModalOpen,
@@ -48,8 +49,9 @@ export const Catalog = () => {
     return favorites.some((favoriteCar) => favoriteCar.id === carId);
   };
 
-  const handleLearnMore = () => {
+  const handleLearnMore = (carId) => {
     dispatch(setIsModalOpen(true));
+    dispatch(addToCarModal(carId));
   };
 
   return (
@@ -83,18 +85,14 @@ export const Catalog = () => {
               <StyledCarsListSpan>{car.id}</StyledCarsListSpan>
               <StyledCarsListSpan>{car.accessories[0]}</StyledCarsListSpan>
             </p>
-            <button onClick={handleLearnMore}>Learn more</button>
+            <button onClick={() => handleLearnMore(car.id)}>Learn more</button>
           </div>
         );
       })}
       {currentPage <= 4 ? (
         <button onClick={handleLoadMore}>Load more</button>
       ) : null}
-      {isModalOpen && (
-        <Modal>
-          {/* Здесь размещается содержимое вашего модального окна */}
-        </Modal>
-      )}
+      {isModalOpen && <Modal />}
     </section>
   );
 };
