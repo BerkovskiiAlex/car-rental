@@ -29,7 +29,7 @@ export const ModalForm = () => {
             <h2>
               {carModal.make} <span>{carModal.model}</span>, {carModal.year}
             </h2>
-            <p>{carModal.rentalPrice}</p>
+            <p>${carModal.rentalPrice}</p>
           </div>
           <p>
             <StyledCarsListSpan>{carModal.city}</StyledCarsListSpan>

@@ -61,7 +61,7 @@ export const Favorites = () => {
                 <h2>
                   {car.make} <span>{car.model}</span>, {car.year}
                 </h2>
-                <p>{car.rentalPrice}</p>
+                <p>${car.rentalPrice}</p>
               </div>
               <p>
                 <StyledCarsListSpan>{car.city}</StyledCarsListSpan>
