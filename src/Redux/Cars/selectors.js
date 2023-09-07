@@ -7,3 +7,7 @@ export const getCars = (state) => {
 export const getFavorites = (state) => {
   return state.carsList.favorites;
 };
+
+export const getIsModalOpen = (state) => {
+  return state.carsList.isModalOpen;
+};

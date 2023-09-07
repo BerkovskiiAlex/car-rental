@@ -6,6 +6,8 @@ import { fetchCarsThunk, loadMoreThunk } from "./operations";
 const initialState = {
   cars: [],
   favorites: [],
+  carsModal: [],
+  isModalOpen: false,
 };
 const carsSlice = createSlice({
   name: "carsList",
@@ -27,6 +29,12 @@ const carsSlice = createSlice({
         );
       }
     },
+    setIsModalOpen: (state, { payload }) => {
+      state.isModalOpen = payload;
+    },
+    setIsModalClose: (state, { payload }) => {
+      state.isModalOpen = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -39,5 +47,10 @@ const carsSlice = createSlice({
   },
 });
 
-export const { addToFavorites, removeFromFavorites } = carsSlice.actions;
+export const {
+  addToFavorites,
+  removeFromFavorites,
+  setIsModalOpen,
+  setIsModalClose,
+} = carsSlice.actions;
 export const carsReducer = carsSlice.reducer;

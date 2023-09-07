@@ -3,22 +3,28 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCarsThunk, loadMoreThunk } from "../../Redux/Cars/operations";
-import { getCars, getFavorites } from "../../Redux/Cars/selectors";
+import {
+  getCars,
+  getFavorites,
+  getIsModalOpen,
+} from "../../Redux/Cars/selectors";
 import {
   StyledActiveIcon,
   StyledCarsListSpan,
-  StyledIcon,
   StyledNormalIcon,
 } from "./Catalog.styled";
 import {
   addToFavorites,
   removeFromFavorites,
+  setIsModalOpen,
 } from "../../Redux/Cars/carsSlice";
+import Modal from "../../components/Modal/Modal";
 
 export const Catalog = () => {
   const dispatch = useDispatch();
   const cars = useSelector(getCars);
   const favorites = useSelector(getFavorites);
+  const isModalOpen = useSelector(getIsModalOpen);
   const [currentPage, setCurrentPage] = useState(2);
 
   useEffect(() => {
@@ -40,6 +46,10 @@ export const Catalog = () => {
 
   const isCarInFavorites = (carId) => {
     return favorites.some((favoriteCar) => favoriteCar.id === carId);
+  };
+
+  const handleLearnMore = () => {
+    dispatch(setIsModalOpen(true));
   };
 
   return (
@@ -73,13 +83,18 @@ export const Catalog = () => {
               <StyledCarsListSpan>{car.id}</StyledCarsListSpan>
               <StyledCarsListSpan>{car.accessories[0]}</StyledCarsListSpan>
             </p>
-            <button>Learn more</button>
+            <button onClick={handleLearnMore}>Learn more</button>
           </div>
         );
       })}
       {currentPage <= 4 ? (
         <button onClick={handleLoadMore}>Load more</button>
       ) : null}
+      {isModalOpen && (
+        <Modal>
+          {/* Здесь размещается содержимое вашего модального окна */}
+        </Modal>
+      )}
     </section>
   );
 };
