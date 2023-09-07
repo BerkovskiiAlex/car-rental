@@ -20,3 +20,21 @@ export const StyledCloseIcon = styled(CloseIcon)`
   right: 16px;
   top: 16px;
 `;
+
+export const StyledRentalCar = styled.a`
+  display: inline-block;
+  padding: 8px 16px;
+  color: #fff;
+  background-color: #007bff;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+    color: #fff;
+  }
+`;

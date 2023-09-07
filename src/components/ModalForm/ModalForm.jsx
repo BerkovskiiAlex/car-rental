@@ -1,12 +1,15 @@
 /** @format */
 
 import React from "react";
-import { StyledCloseIcon, StyledModalSection } from "./ModalForm.styled";
+import {
+  StyledCloseIcon,
+  StyledModalSection,
+  StyledRentalCar,
+} from "./ModalForm.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsModalClose } from "../../Redux/Cars/carsSlice";
 import { getCarModal } from "../../Redux/Cars/selectors";
 import { StyledCarsListSpan } from "../../pages/CatalogPage/Catalog.styled";
-import { styled } from "styled-components";
 
 export const ModalForm = () => {
   const dispatch = useDispatch();
@@ -80,21 +83,3 @@ export const ModalForm = () => {
     </StyledModalSection>
   );
 };
-
-export const StyledRentalCar = styled.a`
-  display: inline-block;
-  padding: 8px 16px;
-  color: #fff;
-  background-color: #007bff;
-  text-align: center;
-  text-decoration: none;
-  font-weight: 700;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #0056b3;
-    text-decoration: none;
-    color: #fff;
-  }
-`;
