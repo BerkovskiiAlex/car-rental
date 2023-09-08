@@ -25,6 +25,8 @@ export const Favorites = () => {
   const [selectedPrice, setSelectedPrice] = useState("");
   const [mileageRange, setMileageRange] = useState({ min: "", max: "" });
 
+  const [filteredFavorites, setFilteredFavorites] = useState(favorites);
+
   const isCarInFavorites = (carId) => {
     return favorites.some((favoriteCar) => favoriteCar.id === carId);
   };
@@ -42,72 +44,103 @@ export const Favorites = () => {
     dispatch(addToCarModal(carId));
   };
 
-  const filterFavoriteCars = (car) => {
-    let makeFilter = !selectedMake || car.make === selectedMake;
-    let priceFilter = !selectedPrice || car.rentalPrice <= selectedPrice;
-    let mileageFilter =
-      (!mileageRange.min || car.mileage >= mileageRange.min) &&
-      (!mileageRange.max || car.mileage <= mileageRange.max);
-    return makeFilter && priceFilter && mileageFilter;
+  const filterFavoriteCars = () => {
+    return favorites.filter((car) => {
+      let makeFilter = !selectedMake || car.make === selectedMake;
+      let priceFilter = !selectedPrice || car.rentalPrice <= selectedPrice;
+      let mileageFilter =
+        (!mileageRange.min || car.mileage >= mileageRange.min) &&
+        (!mileageRange.max || car.mileage <= mileageRange.max);
+      return makeFilter && priceFilter && mileageFilter;
+    });
   };
 
-  const filteredFavoriteCars = favorites.filter(filterFavoriteCars);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "min" || name === "max") {
+      setMileageRange({ ...mileageRange, [name]: value });
+    } else if (e.target.id === "makeFilter") {
+      setSelectedMake(value);
+    } else if (e.target.id === "priceFilter") {
+      setSelectedPrice(value);
+    }
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    setFilteredFavorites(filterFavoriteCars());
+  };
 
   return (
     <section>
-      <div>
-        <label htmlFor="makeFilter">Make:</label>
-        <select
-          id="makeFilter"
-          value={selectedMake}
-          onChange={(e) => setSelectedMake(e.target.value)}
-        >
-          <option value="">All</option>
-          {makes.map((make) => (
-            <option key={make.id} value={make.name}>
-              {make.name}
-            </option>
-          ))}
-        </select>
+      <form
+        onSubmit={handleFormSubmit}
+        style={{ display: "flex", gap: "18px" }}
+      >
+        <div style={{ display: "flex", gap: "18px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <label htmlFor="makeFilter">Car brand</label>
+            <select
+              id="makeFilter"
+              name="makeFilter"
+              value={selectedMake}
+              onChange={handleChange}
+            >
+              <option value="">All</option>
+              {makes.map((make) => (
+                <option key={make.id} value={make.name}>
+                  {make.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <label htmlFor="priceFilter">Max Price:</label>
-        <select
-          id="priceFilter"
-          value={selectedPrice}
-          onChange={(e) => setSelectedPrice(e.target.value)}
-        >
-          <option value="">All</option>
-          {[...Array(50)].map((_, index) => (
-            <option key={index} value={(index + 1) * 10}>
-              ${(index + 1) * 10}
-            </option>
-          ))}
-        </select>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <label htmlFor="priceFilter">Price/ 1 hour</label>
+            <select
+              id="priceFilter"
+              name="priceFilter"
+              value={selectedPrice}
+              onChange={handleChange}
+            >
+              <option value="">All</option>
+              {[...Array(50)].map((_, index) => (
+                <option key={index} value={(index + 1) * 10}>
+                  ${(index + 1) * 10}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <label htmlFor="minMileageRange">Mileage Range:</label>
-        <input
-          type="number"
-          id="minMileageRange"
-          placeholder="Min"
-          value={mileageRange.min}
-          onChange={(e) =>
-            setMileageRange({ ...mileageRange, min: e.target.value })
-          }
-        />
-        <input
-          type="number"
-          id="maxMileageRange"
-          placeholder="Max"
-          value={mileageRange.max}
-          onChange={(e) =>
-            setMileageRange({ ...mileageRange, max: e.target.value })
-          }
-        />
-      </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <label htmlFor="minMileageRange">Car mileage / km</label>
+            <div style={{ display: "flex" }}>
+              <input
+                type="number"
+                id="minMileageRange"
+                name="min"
+                placeholder="Min"
+                value={mileageRange.min}
+                onChange={handleChange}
+              />
+              <input
+                type="number"
+                id="maxMileageRange"
+                name="max"
+                placeholder="Max"
+                value={mileageRange.max}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+        </div>
+        <button type="submit">Filter favorites</button>
+      </form>
       {favorites.length === 0 ? (
         <h1>No cars found in favorites.</h1>
       ) : (
-        filteredFavoriteCars.map((car) => {
+        filteredFavorites.map((car) => {
           const carIsFavorite = isCarInFavorites(car.id);
           return (
             <div key={car.id}>
