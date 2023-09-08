@@ -47,14 +47,13 @@ section {
 ul,
 ol {
   padding-left: 0;
-  list-style-type: none;
   list-style: none;
 }
 
-html,
 body {
-  overflow-x: hidden;
+  font-family: Manrope;
 }
+
 
 html:focus-within {
   scroll-behavior: smooth;

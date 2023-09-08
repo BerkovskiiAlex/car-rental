@@ -1,8 +1,8 @@
 /** @format */
 
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
-import { StyledNav } from "./Layout.styled";
+import { Outlet } from "react-router-dom";
+import { StyledNav, StyledNavLink, StyledUl } from "./Layout.styled";
 
 export const Layout = () => {
   const pages = [
@@ -13,13 +13,13 @@ export const Layout = () => {
   return (
     <div>
       <StyledNav>
-        <ul>
+        <StyledUl>
           {pages.map((page) => (
             <li key={page.title}>
-              <NavLink to={page.src}>{page.title}</NavLink>
+              <StyledNavLink to={page.src}>{page.title}</StyledNavLink>
             </li>
           ))}
-        </ul>
+        </StyledUl>
       </StyledNav>
       <Outlet />
     </div>
