@@ -18,7 +18,8 @@ export const StyledUl = styled.ul`
 export const StyledNavLink = styled(NavLink)`
   border-radius: 20px;
 
-  &:hover {
+  &:hover,
+  &:focus {
     position: relative;
     text-align: center;
     font-size: 18px;
@@ -33,7 +34,6 @@ export const StyledNavLink = styled(NavLink)`
     background-position: center;
     transition: background-position 0.3s, box-shadow 0.3s;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-
     background-position: 50% 50%;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   }
