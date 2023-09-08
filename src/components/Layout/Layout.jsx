@@ -2,6 +2,7 @@
 
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { StyledNav } from "./Layout.styled";
 
 export const Layout = () => {
   const pages = [
@@ -11,7 +12,7 @@ export const Layout = () => {
   ];
   return (
     <div>
-      <nav>
+      <StyledNav>
         <ul>
           {pages.map((page) => (
             <li key={page.title}>
@@ -19,7 +20,7 @@ export const Layout = () => {
             </li>
           ))}
         </ul>
-      </nav>
+      </StyledNav>
       <Outlet />
     </div>
   );
