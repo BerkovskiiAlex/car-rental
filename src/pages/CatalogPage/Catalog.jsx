@@ -32,9 +32,15 @@ export const Catalog = () => {
   const [selectedPrice, setSelectedPrice] = useState("");
   const [mileageRange, setMileageRange] = useState({ min: "", max: "" });
 
+  const [filteredCars, setFilteredCars] = useState(cars);
+
   useEffect(() => {
     dispatch(fetchCarsThunk());
   }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredCars(cars);
+  }, [cars]);
 
   const handleLoadMore = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -58,76 +64,103 @@ export const Catalog = () => {
     dispatch(addToCarModal(carId));
   };
 
-  const filterCars = (car) => {
-    let makeFilter = !selectedMake || car.make === selectedMake;
-    let priceFilter = !selectedPrice || car.rentalPrice <= selectedPrice;
-    let mileageFilter =
-      (!mileageRange.min || car.mileage >= mileageRange.min) &&
-      (!mileageRange.max || car.mileage <= mileageRange.max);
-    return makeFilter && priceFilter && mileageFilter;
+  const filterCars = () => {
+    return cars.filter((car) => {
+      let makeFilter = !selectedMake || car.make === selectedMake;
+      let priceFilter = !selectedPrice || car.rentalPrice <= selectedPrice;
+      let mileageFilter =
+        (!mileageRange.min || car.mileage >= mileageRange.min) &&
+        (!mileageRange.max || car.mileage <= mileageRange.max);
+      return makeFilter && priceFilter && mileageFilter;
+    });
   };
 
-  const filteredCars = cars.filter(filterCars);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "min" || name === "max") {
+      setMileageRange({ ...mileageRange, [name]: value });
+    } else if (name === "makeFilter") {
+      setSelectedMake(value);
+    } else if (name === "priceFilter") {
+      setSelectedPrice(value);
+    }
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    setFilteredCars(filterCars());
+
+    setSelectedMake("");
+    setSelectedPrice("");
+    setMileageRange({ min: "", max: "" });
+  };
 
   return (
     <section>
-      <div style={{ display: "flex", gap: "18px" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          <label htmlFor="makeFilter">Car brand</label>
-          <select
-            id="makeFilter"
-            value={selectedMake}
-            onChange={(e) => setSelectedMake(e.target.value)}
-          >
-            <option value="">All</option>
-            {makes.map((make) => (
-              <option key={make.id} value={make.name}>
-                {make.name}
-              </option>
-            ))}
-          </select>
-        </div>
+      <form
+        onSubmit={handleFormSubmit}
+        style={{ display: "flex", gap: "18px" }}
+      >
+        <div style={{ display: "flex", gap: "18px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <label htmlFor="makeFilter">Car brand</label>
+            <select
+              id="makeFilter"
+              name="makeFilter"
+              value={selectedMake}
+              onChange={handleChange}
+            >
+              <option value="">All</option>
+              {makes.map((make) => (
+                <option key={make.id} value={make.name}>
+                  {make.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          <label htmlFor="priceFilter">Price/ 1 hour</label>
-          <select
-            id="priceFilter"
-            value={selectedPrice}
-            onChange={(e) => setSelectedPrice(e.target.value)}
-          >
-            <option value="">All</option>
-            {[...Array(50)].map((_, index) => (
-              <option key={index} value={(index + 1) * 10}>
-                ${(index + 1) * 10}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <label htmlFor="priceFilter">Price/ 1 hour</label>
+            <select
+              id="priceFilter"
+              name="priceFilter"
+              value={selectedPrice}
+              onChange={handleChange}
+            >
+              <option value="">All</option>
+              {[...Array(50)].map((_, index) => (
+                <option key={index} value={(index + 1) * 10}>
+                  ${(index + 1) * 10}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          <label htmlFor="minMileageRange">Car mileage / km</label>
-          <div style={{ display: "flex" }}>
-            <input
-              type="number"
-              id="minMileageRange"
-              placeholder="Min"
-              value={mileageRange.min}
-              onChange={(e) =>
-                setMileageRange({ ...mileageRange, min: e.target.value })
-              }
-            />
-            <input
-              type="number"
-              id="maxMileageRange"
-              placeholder="Max"
-              value={mileageRange.max}
-              onChange={(e) =>
-                setMileageRange({ ...mileageRange, max: e.target.value })
-              }
-            />
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <label htmlFor="minMileageRange">Car mileage / km</label>
+            <div style={{ display: "flex" }}>
+              <input
+                type="number"
+                id="minMileageRange"
+                name="min"
+                placeholder="Min"
+                value={mileageRange.min}
+                onChange={handleChange}
+              />
+              <input
+                type="number"
+                id="maxMileageRange"
+                name="max"
+                placeholder="Max"
+                value={mileageRange.max}
+                onChange={handleChange}
+              />
+            </div>
           </div>
         </div>
-      </div>
+        <button type="submit">Search</button>
+      </form>
       {filteredCars.map((car) => {
         const carIsFavorite = isCarInFavorites(car.id);
         return (
@@ -168,36 +201,3 @@ export const Catalog = () => {
     </section>
   );
 };
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     if (name === "min" || name === "max") {
-//       setForm({
-//         ...form,
-//         mileageRange: { ...form.mileageRange, [name]: value },
-//       });
-//     } else {
-//       setForm({ ...form, [name]: value });
-//     }
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//   };
-
-//   return (
-//     <section>
-//       <form onSubmit={handleSubmit} style={{ display: "flex", gap: "18px" }}>
-//         // ... все элементы формы с лейблами и инпутами, замените их атрибуты
-//         onChange и value на handleChange и form 갭
-//       </form>
-//       {filteredCars.map((car) => {
-//         // ... оставшиеся части кода
-//       })}
-//       {currentPage <= 4 ? (
-//         <button onClick={handleLoadMore}>Load more</button>
-//       ) : null}
-//       {isModalOpen && <Modal />}
-//     </section>
-//   );
-// };
