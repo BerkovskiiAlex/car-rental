@@ -250,7 +250,7 @@ export const Catalog = () => {
           );
         })}
       </StyledCardsListDiv>
-      {currentPage <= 4 ? (
+      {currentPage <= 5 ? (
         <StyledLoadMoreButton onClick={handleLoadMore}>
           Load more
         </StyledLoadMoreButton>

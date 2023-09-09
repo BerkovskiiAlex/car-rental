@@ -9,7 +9,7 @@ export const StyledModalSection = styled.section`
   background: #ffffff;
   box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
   width: 541px;
-  height: 752px;
+  min-height: 752px;
 `;
 
 export const StyledCloseIcon = styled(CloseIcon)`

@@ -16,6 +16,14 @@
     "name": "Volvo"
   },
   {
+    "id": 22,
+    "name": "ZAZ"
+  },
+  {
+    "id": 23,
+    "name": "UAZ"
+  },
+  {
     "id": 5,
     "name": "Subaru"
   },
@@ -45,7 +53,7 @@
   },
   {
     "id": 12,
-    "name": "Mercedes-Benz"
+    "name": "Mercedes"
   },
   {
     "id": 13,
