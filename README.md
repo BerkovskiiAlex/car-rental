@@ -1,6 +1,5 @@
 <!-- @format -->
 
-Car Rental Service
 Car Rental Service is a user-friendly web application that allows customers to browse, filter, and rent the perfect car for their needs. It includes an extensive catalog of vehicles from various manufacturers, rental options for short-term and long-term timeframes, and an easy-to-use interface for managing favorite vehicles.
 
 Home
