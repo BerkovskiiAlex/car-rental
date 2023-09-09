@@ -42,6 +42,7 @@ export const StyledHero = styled.h1`
   font-weight: bold;
   text-align: center;
   border: 1px solid black;
+  box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
 `;
 
 export const StyledHeroP = styled.p`
@@ -55,6 +56,7 @@ export const StyledHeroP = styled.p`
   font-weight: bold;
   text-align: center;
   border: 1px solid black;
+  box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
 `;
 
 export const StyledServicesList = styled.ul`
@@ -78,6 +80,7 @@ export const StyledService = styled.li`
   margin: 15px 0;
   width: 300px;
   text-align: center;
+  box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
 `;
 
 export const StyledServiceTitle = styled.h2`
