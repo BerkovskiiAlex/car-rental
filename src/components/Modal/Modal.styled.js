@@ -6,7 +6,7 @@ export const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 1440px;
   height: 100vh;
   display: flex;
   justify-content: center;

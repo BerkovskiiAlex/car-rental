@@ -205,7 +205,6 @@ export const StyledActiveIcon = styled(activeIcon)`
 export const StyledCardMarkDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-wrap: nowrap;
   color: #121417;
   width: 274px;
   font-size: 16px;
@@ -248,8 +247,9 @@ export const StyledMachineDescriptionSpan = styled.span`
   font-size: 12px;
   line-height: 18px;
   &:not(:last-child):after {
+    color: rgba(18, 20, 23, 0.1);
     content: "|";
-    padding-left: 5px;
+    padding: 0 2px;
   }
 `;
 

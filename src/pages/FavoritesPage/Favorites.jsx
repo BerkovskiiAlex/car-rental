@@ -14,7 +14,6 @@ import {
   StyledCarBrandDiv,
   StyledCarBrandSelect,
   StyledCarMileageDiv,
-  StyledCarMileageInputs,
   StyledCarMileageInputsDiv,
   StyledForm,
   StyledLabel,
@@ -205,10 +204,10 @@ export const Favorites = () => {
                 <StyledAdressP>
                   <StyledMachineDescriptionSpan>
                     {car.city}
-                  </StyledMachineDescriptionSpan>{" "}
+                  </StyledMachineDescriptionSpan>
                   <StyledMachineDescriptionSpan>
                     {car.country}
-                  </StyledMachineDescriptionSpan>{" "}
+                  </StyledMachineDescriptionSpan>
                   <StyledMachineDescriptionSpan>
                     {car.rentalCompany}
                   </StyledMachineDescriptionSpan>
@@ -216,13 +215,13 @@ export const Favorites = () => {
                 <StyledTypeP>
                   <StyledMachineDescriptionSpan>
                     {car.type}
-                  </StyledMachineDescriptionSpan>{" "}
+                  </StyledMachineDescriptionSpan>
                   <StyledMachineDescriptionSpan>
                     {car.model}
-                  </StyledMachineDescriptionSpan>{" "}
+                  </StyledMachineDescriptionSpan>
                   <StyledMachineDescriptionSpan>
                     {car.id}
-                  </StyledMachineDescriptionSpan>{" "}
+                  </StyledMachineDescriptionSpan>
                   <StyledMachineDescriptionSpan>
                     {car.accessories[0]}
                   </StyledMachineDescriptionSpan>
