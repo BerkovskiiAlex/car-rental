@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import carRentalIcon from "../../data/car-rental.png";
+import { Link } from "react-router-dom";
 
 export const StyledContainer = styled.div`
   width: 1440px;
@@ -31,7 +32,7 @@ export const StyledContainer = styled.div`
 `;
 
 export const StyledHero = styled.h1`
-  font-size: 48px;
+  font-size: 42px;
   color: #000000;
   background-color: #ffffffde;
   margin-top: 192px;
@@ -44,7 +45,7 @@ export const StyledHero = styled.h1`
 `;
 
 export const StyledHeroP = styled.p`
-  font-size: 32px;
+  font-size: 28px;
   color: #000000;
   background-color: #ffffffde;
   margin-top: 50px;
@@ -65,12 +66,13 @@ export const StyledServicesList = styled.ul`
   margin: 50px 0 192px 0;
   row-gap: 30px;
   column-gap: 50px;
+  z-index: 1;
 `;
 
 export const StyledService = styled.li`
   flex-basis: 45%;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: rgb(255 255 255 / 90%);
   border-radius: 20px;
   border: 1px solid black;
   margin: 15px 0;
@@ -79,14 +81,36 @@ export const StyledService = styled.li`
 `;
 
 export const StyledServiceTitle = styled.h2`
-  font-size: 24px;
+  font-size: 20px;
   color: #333;
   font-weight: bold;
 `;
 
 export const StyledServiceDescription = styled.p`
-  font-size: 16px;
+  font-size: 14px;
   color: #666;
   line-height: 1.4;
   margin-top: 24px;
+`;
+
+export const StyledHomeLink = styled(Link)`
+  display: inline-block;
+  padding: 12px 50px;
+  margin-top: 24px;
+  color: #fff;
+  background-color: #007bff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  border-radius: 12px;
+  background: #3470ff;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+    color: #fff;
+  }
 `;

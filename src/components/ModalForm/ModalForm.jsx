@@ -130,10 +130,7 @@ export const ModalForm = () => {
               </StyledModalMontserratAgeSpan>
             </StyledModalRentalConditionsListP>
           </StyledModalRentalConditionsDiv>
-          <StyledRentalCarLink
-            href="tel:+380730000000"
-            className="rental-car-link"
-          >
+          <StyledRentalCarLink href="tel:+380730000000">
             Rental car
           </StyledRentalCarLink>
         </StyledModalDiv>

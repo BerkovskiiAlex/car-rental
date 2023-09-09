@@ -9,7 +9,9 @@ import {
   StyledServiceDescription,
   StyledHero,
   StyledHeroP,
+  StyledHomeLink,
 } from "./Home.styled";
+import { StyledRentalCarLink } from "../../components/ModalForm/ModalForm.styled";
 
 export const Home = () => {
   return (
@@ -28,6 +30,18 @@ export const Home = () => {
             Choose from our extensive selection of cars, including sedans, SUVs,
             luxury and sports cars.
           </StyledServiceDescription>
+          <StyledHomeLink to="/catalog">Watch cars</StyledHomeLink>
+        </StyledService>
+        <StyledService>
+          <StyledServiceTitle>Exceptional Assistance</StyledServiceTitle>
+          <StyledServiceDescription>
+            Our committed assistance team is on standby around the clock to
+            address any inquiries or issues you might encounter. Your
+            satisfaction is our utmost priority.
+          </StyledServiceDescription>
+          <StyledRentalCarLink href="tel:+380730000000">
+            Contact us
+          </StyledRentalCarLink>
         </StyledService>
         <StyledService>
           <StyledServiceTitle>Flexible Rental Periods</StyledServiceTitle>
@@ -41,14 +55,6 @@ export const Home = () => {
           <StyledServiceDescription>
             Our prices are among the best in the market, ensuring that you can
             enjoy great service without breaking the bank.
-          </StyledServiceDescription>
-        </StyledService>
-        <StyledService>
-          <StyledServiceTitle>Exceptional Assistance</StyledServiceTitle>
-          <StyledServiceDescription>
-            Our committed assistance team is on standby around the clock to
-            address any inquiries or issues you might encounter. Your
-            satisfaction is our utmost priority.
           </StyledServiceDescription>
         </StyledService>
       </StyledServicesList>
