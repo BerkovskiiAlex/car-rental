@@ -46,6 +46,8 @@ export const Catalog = () => {
 
   const [filteredCars, setFilteredCars] = useState(cars);
 
+  const [userInputs, setUserInputs] = useState({ min: "", max: "" });
+
   useEffect(() => {
     dispatch(fetchCarsThunk());
   }, [dispatch]);
@@ -89,7 +91,16 @@ export const Catalog = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "min" || name === "max") {
-      setMileageRange({ ...mileageRange, [name]: value });
+      setUserInputs({ ...userInputs, [name]: value });
+
+      const cleanedValue = value.replace(/[^\d.,]/g, "");
+      const numberValue = parseFloat(cleanedValue.replace(/,/g, ""), 10);
+      if (!isNaN(numberValue)) {
+        setMileageRange({
+          ...mileageRange,
+          [name]: numberValue,
+        });
+      }
     } else if (name === "makeFilter") {
       setSelectedMake(value);
     } else if (name === "priceFilter") {
@@ -148,19 +159,19 @@ export const Catalog = () => {
           </StyledCatalogLabel>
           <StyledCatalogCarMileageInputsDiv>
             <StyledCatalogCarMileageInputs
-              type="number"
+              type="text"
               id="minMileageRange"
               name="min"
               placeholder="Min"
-              value={mileageRange.min}
+              value={userInputs.min}
               onChange={handleChange}
             />
             <StyledCatalogCarMileageInputs
-              type="number"
+              type="text"
               id="maxMileageRange"
               name="max"
               placeholder="Max"
-              value={mileageRange.max}
+              value={userInputs.max}
               onChange={handleChange}
             />
           </StyledCatalogCarMileageInputsDiv>
