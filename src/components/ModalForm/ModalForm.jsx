@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setIsModalClose } from "../../Redux/Cars/carsSlice";
 import { getCarModal } from "../../Redux/Cars/selectors";
-import { StyledCarsListSpan } from "../../pages/CatalogPage/Catalog.styled";
+import { StyledMachineDescriptionSpan } from "../../pages/CatalogPage/Catalog.styled";
 
 export const ModalForm = () => {
   const dispatch = useDispatch();
@@ -32,32 +32,42 @@ export const ModalForm = () => {
             <p>${carModal.rentalPrice}</p>
           </div>
           <p>
-            <StyledCarsListSpan>{carModal.city}</StyledCarsListSpan>
-            <StyledCarsListSpan>{carModal.country}</StyledCarsListSpan>
-            <StyledCarsListSpan>id: {carModal.id}</StyledCarsListSpan>
-            <StyledCarsListSpan>year: {carModal.year}</StyledCarsListSpan>
-            <StyledCarsListSpan>type: {carModal.type}</StyledCarsListSpan>
-            <StyledCarsListSpan>
+            <StyledMachineDescriptionSpan>
+              {carModal.city}
+            </StyledMachineDescriptionSpan>
+            <StyledMachineDescriptionSpan>
+              {carModal.country}
+            </StyledMachineDescriptionSpan>
+            <StyledMachineDescriptionSpan>
+              id: {carModal.id}
+            </StyledMachineDescriptionSpan>
+            <StyledMachineDescriptionSpan>
+              year: {carModal.year}
+            </StyledMachineDescriptionSpan>
+            <StyledMachineDescriptionSpan>
+              type: {carModal.type}
+            </StyledMachineDescriptionSpan>
+            <StyledMachineDescriptionSpan>
               fuelConsumption: {carModal.fuelConsumption}
-            </StyledCarsListSpan>
-            <StyledCarsListSpan>
+            </StyledMachineDescriptionSpan>
+            <StyledMachineDescriptionSpan>
               Engine Size: {carModal.engineSize}
-            </StyledCarsListSpan>
+            </StyledMachineDescriptionSpan>
           </p>
           <p> {carModal.description}</p>
           <p>Accessories and functionalities:</p>
           <p>
             {carModal.accessories.map((accessorie) => (
-              <StyledCarsListSpan key={accessorie}>
+              <StyledMachineDescriptionSpan key={accessorie}>
                 {accessorie}
-              </StyledCarsListSpan>
+              </StyledMachineDescriptionSpan>
             ))}
           </p>
           <p>
             {carModal.functionalities.map((functional) => (
-              <StyledCarsListSpan key={functional}>
+              <StyledMachineDescriptionSpan key={functional}>
                 {functional}
-              </StyledCarsListSpan>
+              </StyledMachineDescriptionSpan>
             ))}
           </p>
           <div>

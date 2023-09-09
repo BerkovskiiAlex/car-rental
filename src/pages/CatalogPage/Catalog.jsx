@@ -10,20 +10,35 @@ import {
 } from "../../Redux/Cars/selectors";
 import {
   StyledActiveIcon,
-  StyledCarsListSpan,
-  StyledCatalogCarBrandDiv,
-  StyledCatalogCarBrandSelect,
-  StyledCatalogCarMileageDiv,
-  StyledCatalogCarMileageInputs,
-  StyledCatalogCarMileageInputsDiv,
-  StyledCatalogForm,
-  StyledCatalogLabel,
-  StyledCatalogOption,
-  StyledCatalogPriceDiv,
-  StyledCatalogPriceSelect,
-  StyledCatalogSearchButton,
-  StyledCatalogSection,
+  StyledCarBrandDiv,
+  StyledCarBrandSelect,
+  StyledCarMileageDiv,
+  StyledCarMileageInputs,
+  StyledCarMileageInputsDiv,
+  StyledForm,
+  StyledLabel,
+  StyledOption,
+  StyledPriceDiv,
+  StyledPriceSelect,
+  StyledSearchButton,
+  StyledSection,
   StyledNormalIcon,
+  StyledCardDiv,
+  StyledFullCardDiv,
+  StyledImages,
+  StyledImage,
+  StyledCardMarkDiv,
+  StyledCardMarkH2,
+  StyledCardMarkSpan,
+  StyledCardMarkP,
+  StyledMachineDescriptionSpan,
+  StyledAdressP,
+  StyledTypeP,
+  StyledLearnMoreButton,
+  StyledCardsListDiv,
+  StyledCarMileageRightInput,
+  StyledCarMileageLeftInput,
+  StyledLoadMoreButton,
 } from "./Catalog.styled";
 import {
   addToCarModal,
@@ -46,7 +61,7 @@ export const Catalog = () => {
 
   const [filteredCars, setFilteredCars] = useState(cars);
 
-  const [userInputs, setUserInputs] = useState({ min: "", max: "" });
+  const [userInputs, setUserInputs] = useState({ min: "From ", max: "To " });
 
   useEffect(() => {
     dispatch(fetchCarsThunk());
@@ -115,108 +130,128 @@ export const Catalog = () => {
   };
 
   return (
-    <StyledCatalogSection>
-      <StyledCatalogForm onSubmit={handleFormSubmit}>
-        <StyledCatalogCarBrandDiv>
-          <StyledCatalogLabel htmlFor="makeFilter">
-            Car brand
-          </StyledCatalogLabel>
-          <StyledCatalogCarBrandSelect
+    <StyledSection>
+      <StyledForm onSubmit={handleFormSubmit}>
+        <StyledCarBrandDiv>
+          <StyledLabel htmlFor="makeFilter">Car brand</StyledLabel>
+          <StyledCarBrandSelect
             id="makeFilter"
             name="makeFilter"
             value={selectedMake}
             onChange={handleChange}
           >
-            <StyledCatalogOption value="">All</StyledCatalogOption>
+            <StyledOption value="">All</StyledOption>
             {makes.map((make) => (
-              <StyledCatalogOption key={make.id} value={make.name}>
+              <StyledOption key={make.id} value={make.name}>
                 {make.name}
-              </StyledCatalogOption>
+              </StyledOption>
             ))}
-          </StyledCatalogCarBrandSelect>
-        </StyledCatalogCarBrandDiv>
-        <StyledCatalogPriceDiv>
-          <StyledCatalogLabel htmlFor="priceFilter">
-            Price/ 1 hour
-          </StyledCatalogLabel>
-          <StyledCatalogPriceSelect
+          </StyledCarBrandSelect>
+        </StyledCarBrandDiv>
+        <StyledPriceDiv>
+          <StyledLabel htmlFor="priceFilter">Price/ 1 hour</StyledLabel>
+          <StyledPriceSelect
             id="priceFilter"
             name="priceFilter"
             value={selectedPrice}
             onChange={handleChange}
           >
-            <StyledCatalogOption value="">All</StyledCatalogOption>
+            <StyledOption value="">All</StyledOption>
             {[...Array(50)].map((_, index) => (
-              <StyledCatalogOption key={index} value={(index + 1) * 10}>
+              <StyledOption key={index} value={(index + 1) * 10}>
                 {`To ${(index + 1) * 10}$`}
-              </StyledCatalogOption>
+              </StyledOption>
             ))}
-          </StyledCatalogPriceSelect>
-        </StyledCatalogPriceDiv>
-        <StyledCatalogCarMileageDiv>
-          <StyledCatalogLabel htmlFor="minMileageRange">
-            Car mileage / km
-          </StyledCatalogLabel>
-          <StyledCatalogCarMileageInputsDiv>
-            <StyledCatalogCarMileageInputs
+          </StyledPriceSelect>
+        </StyledPriceDiv>
+        <StyledCarMileageDiv>
+          <StyledLabel htmlFor="minMileageRange">Car mileage / km</StyledLabel>
+          <StyledCarMileageInputsDiv>
+            <StyledCarMileageLeftInput
               type="text"
               id="minMileageRange"
               name="min"
-              placeholder="Min"
+              placeholder="From"
               value={userInputs.min}
               onChange={handleChange}
             />
-            <StyledCatalogCarMileageInputs
+            <StyledCarMileageRightInput
               type="text"
               id="maxMileageRange"
               name="max"
-              placeholder="Max"
+              placeholder="To"
               value={userInputs.max}
               onChange={handleChange}
             />
-          </StyledCatalogCarMileageInputsDiv>
-        </StyledCatalogCarMileageDiv>
-        <StyledCatalogSearchButton type="submit">
-          Search
-        </StyledCatalogSearchButton>
-      </StyledCatalogForm>
-      {filteredCars.map((car) => {
-        const carIsFavorite = isCarInFavorites(car.id);
-        return (
-          <div key={car.id}>
-            <img src={car.img} alt={car.description} width={274} />
-            {carIsFavorite ? (
-              <StyledActiveIcon
-                onClick={() => toggleFavorite(car, carIsFavorite)}
-              />
-            ) : (
-              <StyledNormalIcon
-                onClick={() => toggleFavorite(car, carIsFavorite)}
-              />
-            )}
-            <div>
-              <h2>
-                {car.make} <span>{car.model}</span>, {car.year}
-              </h2>
-              <p>${car.rentalPrice}</p>
-            </div>
-            <p>
-              <StyledCarsListSpan>{car.city}</StyledCarsListSpan>
-              <StyledCarsListSpan>{car.country}</StyledCarsListSpan>
-              <StyledCarsListSpan>{car.rentalCompany}</StyledCarsListSpan>
-              <StyledCarsListSpan>{car.type}</StyledCarsListSpan>
-              <StyledCarsListSpan>{car.model}</StyledCarsListSpan>
-              <StyledCarsListSpan>{car.id}</StyledCarsListSpan>
-              <StyledCarsListSpan>{car.accessories[0]}</StyledCarsListSpan>
-            </p>
-            <button onClick={() => handleLearnMore(car.id)}>Learn more</button>
-          </div>
-        );
-      })}
+          </StyledCarMileageInputsDiv>
+        </StyledCarMileageDiv>
+        <StyledSearchButton type="submit">Search</StyledSearchButton>
+      </StyledForm>
+      <StyledCardsListDiv>
+        {filteredCars.map((car) => {
+          const carIsFavorite = isCarInFavorites(car.id);
+          return (
+            <StyledFullCardDiv key={car.id}>
+              <StyledCardDiv>
+                <StyledImages>
+                  <StyledImage src={car.img} alt={car.description} />
+                  {carIsFavorite ? (
+                    <StyledActiveIcon
+                      onClick={() => toggleFavorite(car, carIsFavorite)}
+                    />
+                  ) : (
+                    <StyledNormalIcon
+                      onClick={() => toggleFavorite(car, carIsFavorite)}
+                    />
+                  )}
+                </StyledImages>
+                <StyledCardMarkDiv>
+                  <StyledCardMarkH2>
+                    {car.make}{" "}
+                    <StyledCardMarkSpan>{car.model}</StyledCardMarkSpan>,{" "}
+                    {car.year}
+                  </StyledCardMarkH2>
+                  <StyledCardMarkP>${car.rentalPrice}</StyledCardMarkP>
+                </StyledCardMarkDiv>
+                <StyledAdressP>
+                  <StyledMachineDescriptionSpan>
+                    {car.city}
+                  </StyledMachineDescriptionSpan>{" "}
+                  <StyledMachineDescriptionSpan>
+                    {car.country}
+                  </StyledMachineDescriptionSpan>{" "}
+                  <StyledMachineDescriptionSpan>
+                    {car.rentalCompany}
+                  </StyledMachineDescriptionSpan>
+                </StyledAdressP>
+                <StyledTypeP>
+                  <StyledMachineDescriptionSpan>
+                    {car.type}
+                  </StyledMachineDescriptionSpan>{" "}
+                  <StyledMachineDescriptionSpan>
+                    {car.model}
+                  </StyledMachineDescriptionSpan>{" "}
+                  <StyledMachineDescriptionSpan>
+                    {car.id}
+                  </StyledMachineDescriptionSpan>{" "}
+                  <StyledMachineDescriptionSpan>
+                    {car.accessories[0]}
+                  </StyledMachineDescriptionSpan>
+                </StyledTypeP>
+              </StyledCardDiv>
+              <StyledLearnMoreButton onClick={() => handleLearnMore(car.id)}>
+                Learn more
+              </StyledLearnMoreButton>
+            </StyledFullCardDiv>
+          );
+        })}
+      </StyledCardsListDiv>
       {currentPage <= 4 ? (
-        <button onClick={handleLoadMore}>Load more</button>
+        <StyledLoadMoreButton onClick={handleLoadMore}>
+          Load more
+        </StyledLoadMoreButton>
       ) : null}
       {isModalOpen && <Modal />}
-    </StyledCatalogSection>
+    </StyledSection>
   );
 };

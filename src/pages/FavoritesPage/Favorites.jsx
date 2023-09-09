@@ -11,8 +11,34 @@ import {
 } from "../../Redux/Cars/carsSlice";
 import {
   StyledActiveIcon,
-  StyledCarsListSpan,
+  StyledCarBrandDiv,
+  StyledCarBrandSelect,
+  StyledCarMileageDiv,
+  StyledCarMileageInputs,
+  StyledCarMileageInputsDiv,
+  StyledForm,
+  StyledLabel,
+  StyledOption,
+  StyledPriceDiv,
+  StyledPriceSelect,
+  StyledSearchButton,
+  StyledSection,
   StyledNormalIcon,
+  StyledMachineDescriptionSpan,
+  StyledCarMileageLeftInput,
+  StyledCarMileageRightInput,
+  StyledCardsListDiv,
+  StyledFullCardDiv,
+  StyledCardDiv,
+  StyledImages,
+  StyledImage,
+  StyledCardMarkDiv,
+  StyledCardMarkH2,
+  StyledCardMarkSpan,
+  StyledCardMarkP,
+  StyledAdressP,
+  StyledTypeP,
+  StyledLearnMoreButton,
 } from "../CatalogPage/Catalog.styled";
 import Modal from "../../components/Modal/Modal";
 import makes from "../../data/makes.json";
@@ -26,6 +52,8 @@ export const Favorites = () => {
   const [mileageRange, setMileageRange] = useState({ min: "", max: "" });
 
   const [filteredFavorites, setFilteredFavorites] = useState(favorites);
+
+  const [userInputs, setUserInputs] = useState({ min: "From ", max: "To " });
 
   useEffect(() => {
     setFilteredFavorites(favorites);
@@ -62,10 +90,19 @@ export const Favorites = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "min" || name === "max") {
-      setMileageRange({ ...mileageRange, [name]: value });
-    } else if (e.target.id === "makeFilter") {
+      setUserInputs({ ...userInputs, [name]: value });
+
+      const cleanedValue = value.replace(/[^\d.,]/g, "");
+      const numberValue = parseFloat(cleanedValue.replace(/,/g, ""), 10);
+      if (!isNaN(numberValue)) {
+        setMileageRange({
+          ...mileageRange,
+          [name]: numberValue,
+        });
+      }
+    } else if (name === "makeFilter") {
       setSelectedMake(value);
-    } else if (e.target.id === "priceFilter") {
+    } else if (name === "priceFilter") {
       setSelectedPrice(value);
     }
   };
@@ -74,113 +111,131 @@ export const Favorites = () => {
     e.preventDefault();
 
     setFilteredFavorites(filterFavoriteCars());
+
+    setSelectedMake("");
+    setSelectedPrice("");
+    setMileageRange({ min: "", max: "" });
+    setUserInputs({ min: "From ", max: "To " });
   };
 
   return (
-    <section>
-      <form
-        onSubmit={handleFormSubmit}
-        style={{ display: "flex", gap: "18px" }}
-      >
-        <div style={{ display: "flex", gap: "18px" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <label htmlFor="makeFilter">Car brand</label>
-            <select
-              id="makeFilter"
-              name="makeFilter"
-              value={selectedMake}
+    <StyledSection>
+      <StyledForm onSubmit={handleFormSubmit}>
+        <StyledCarBrandDiv>
+          <StyledLabel htmlFor="makeFilter">Car brand</StyledLabel>
+          <StyledCarBrandSelect
+            id="makeFilter"
+            name="makeFilter"
+            value={selectedMake}
+            onChange={handleChange}
+          >
+            <StyledOption value="">All</StyledOption>
+            {makes.map((make) => (
+              <StyledOption key={make.id} value={make.name}>
+                {make.name}
+              </StyledOption>
+            ))}
+          </StyledCarBrandSelect>
+        </StyledCarBrandDiv>
+        <StyledPriceDiv>
+          <StyledLabel htmlFor="priceFilter">Price/ 1 hour</StyledLabel>
+          <StyledPriceSelect
+            id="priceFilter"
+            name="priceFilter"
+            value={selectedPrice}
+            onChange={handleChange}
+          >
+            <StyledOption value="">All</StyledOption>
+            {[...Array(50)].map((_, index) => (
+              <StyledOption key={index} value={(index + 1) * 10}>
+                {`To ${(index + 1) * 10}$`}
+              </StyledOption>
+            ))}
+          </StyledPriceSelect>
+        </StyledPriceDiv>
+        <StyledCarMileageDiv>
+          <StyledLabel htmlFor="minMileageRange">Car mileage / km</StyledLabel>
+          <StyledCarMileageInputsDiv>
+            <StyledCarMileageLeftInput
+              type="text"
+              id="minMileageRange"
+              name="min"
+              placeholder="From"
+              value={userInputs.min}
               onChange={handleChange}
-            >
-              <option value="">All</option>
-              {makes.map((make) => (
-                <option key={make.id} value={make.name}>
-                  {make.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <label htmlFor="priceFilter">Price/ 1 hour</label>
-            <select
-              id="priceFilter"
-              name="priceFilter"
-              value={selectedPrice}
+            />
+            <StyledCarMileageRightInput
+              type="text"
+              id="maxMileageRange"
+              name="max"
+              placeholder="To"
+              value={userInputs.max}
               onChange={handleChange}
-            >
-              <option value="">All</option>
-              {[...Array(50)].map((_, index) => (
-                <option key={index} value={(index + 1) * 10}>
-                  ${(index + 1) * 10}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <label htmlFor="minMileageRange">Car mileage / km</label>
-            <div style={{ display: "flex" }}>
-              <input
-                type="number"
-                id="minMileageRange"
-                name="min"
-                placeholder="Min"
-                value={mileageRange.min}
-                onChange={handleChange}
-              />
-              <input
-                type="number"
-                id="maxMileageRange"
-                name="max"
-                placeholder="Max"
-                value={mileageRange.max}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-        </div>
-        <button type="submit">Search</button>
-      </form>
-      {favorites.length === 0 ? (
-        <h1>No cars found in favorites.</h1>
-      ) : (
-        filteredFavorites.map((car) => {
+            />
+          </StyledCarMileageInputsDiv>
+        </StyledCarMileageDiv>
+        <StyledSearchButton type="submit">Search</StyledSearchButton>
+      </StyledForm>
+      <StyledCardsListDiv>
+        {filteredFavorites.map((car) => {
           const carIsFavorite = isCarInFavorites(car.id);
           return (
-            <div key={car.id}>
-              <img src={car.img} alt={car.description} width={274} />
-              {carIsFavorite ? (
-                <StyledActiveIcon
-                  onClick={() => toggleFavorite(car, carIsFavorite)}
-                />
-              ) : (
-                <StyledNormalIcon
-                  onClick={() => toggleFavorite(car, carIsFavorite)}
-                />
-              )}
-              <div>
-                <h2>
-                  {car.make} <span>{car.model}</span>, {car.year}
-                </h2>
-                <p>${car.rentalPrice}</p>
-              </div>
-              <p>
-                <StyledCarsListSpan>{car.city}</StyledCarsListSpan>
-                <StyledCarsListSpan>{car.country}</StyledCarsListSpan>
-                <StyledCarsListSpan>{car.rentalCompany}</StyledCarsListSpan>
-                <StyledCarsListSpan>{car.type}</StyledCarsListSpan>
-                <StyledCarsListSpan>{car.model}</StyledCarsListSpan>
-                <StyledCarsListSpan>{car.id}</StyledCarsListSpan>
-                <StyledCarsListSpan>{car.accessories[0]}</StyledCarsListSpan>
-              </p>
-              <button onClick={() => handleLearnMore(car.id)}>
+            <StyledFullCardDiv key={car.id}>
+              <StyledCardDiv>
+                <StyledImages>
+                  <StyledImage src={car.img} alt={car.description} />
+                  {carIsFavorite ? (
+                    <StyledActiveIcon
+                      onClick={() => toggleFavorite(car, carIsFavorite)}
+                    />
+                  ) : (
+                    <StyledNormalIcon
+                      onClick={() => toggleFavorite(car, carIsFavorite)}
+                    />
+                  )}
+                </StyledImages>
+                <StyledCardMarkDiv>
+                  <StyledCardMarkH2>
+                    {car.make}{" "}
+                    <StyledCardMarkSpan>{car.model}</StyledCardMarkSpan>,{" "}
+                    {car.year}
+                  </StyledCardMarkH2>
+                  <StyledCardMarkP>${car.rentalPrice}</StyledCardMarkP>
+                </StyledCardMarkDiv>
+                <StyledAdressP>
+                  <StyledMachineDescriptionSpan>
+                    {car.city}
+                  </StyledMachineDescriptionSpan>{" "}
+                  <StyledMachineDescriptionSpan>
+                    {car.country}
+                  </StyledMachineDescriptionSpan>{" "}
+                  <StyledMachineDescriptionSpan>
+                    {car.rentalCompany}
+                  </StyledMachineDescriptionSpan>
+                </StyledAdressP>
+                <StyledTypeP>
+                  <StyledMachineDescriptionSpan>
+                    {car.type}
+                  </StyledMachineDescriptionSpan>{" "}
+                  <StyledMachineDescriptionSpan>
+                    {car.model}
+                  </StyledMachineDescriptionSpan>{" "}
+                  <StyledMachineDescriptionSpan>
+                    {car.id}
+                  </StyledMachineDescriptionSpan>{" "}
+                  <StyledMachineDescriptionSpan>
+                    {car.accessories[0]}
+                  </StyledMachineDescriptionSpan>
+                </StyledTypeP>
+              </StyledCardDiv>
+              <StyledLearnMoreButton onClick={() => handleLearnMore(car.id)}>
                 Learn more
-              </button>
-            </div>
+              </StyledLearnMoreButton>
+            </StyledFullCardDiv>
           );
-        })
-      )}
+        })}
+      </StyledCardsListDiv>
       {isModalOpen && <Modal />}
-    </section>
+    </StyledSection>
   );
 };
