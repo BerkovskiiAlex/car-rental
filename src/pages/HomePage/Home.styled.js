@@ -5,18 +5,18 @@ import carRentalIcon from "../../data/car-rental.png";
 import { Link } from "react-router-dom";
 
 export const StyledContainer = styled.div`
-  width: 1440px;
-  margin: 0 auto;
+  max-width: 1440px;
   background-image: url(${carRentalIcon});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  position: fixed;
-  top: 58px;
-  left: 0;
+  position: relative;
   align-items: center;
   display: flex;
   flex-direction: column;
+  background-attachment: fixed;
+  margin-top: 58px;
+  padding: 30px;
 
   &:before {
     content: "";
@@ -31,13 +31,17 @@ export const StyledContainer = styled.div`
   }
 `;
 
-export const StyledHero = styled.h1`
+export const StyledHeroDiv = styled.h1`
+  z-index: 1;
+`;
+
+export const StyledHeroH1 = styled.h1`
   font-size: 42px;
   color: #000000;
   background-color: #ffffffde;
   margin-top: 192px;
   padding: 40px;
-  width: 1000px;
+  max-width: 1000px;
   border-radius: 30px;
   font-weight: bold;
   text-align: center;
@@ -51,7 +55,7 @@ export const StyledHeroP = styled.p`
   background-color: #ffffffde;
   margin-top: 50px;
   padding: 40px;
-  width: 1000px;
+  max-width: 1000px;
   border-radius: 30px;
   font-weight: bold;
   text-align: center;

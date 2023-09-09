@@ -6,7 +6,7 @@ import { ReactComponent as activeIcon } from "../../images/active.svg";
 
 export const StyledSection = styled.section`
   width: 1184px;
-  margin: 92px 128px 150px;
+  margin: 150px 128px;
   background: #fff;
   display: flex;
   flex-direction: column;

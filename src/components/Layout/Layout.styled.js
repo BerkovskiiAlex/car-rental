@@ -4,13 +4,18 @@ import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 
 export const StyledNav = styled.nav`
-  max-width: 1440px;
+  width: 100vw;
   font-family: Manrope;
-  padding: 20px 10%;
+  padding: 20px;
+  margin: 0 auto;
   background-color: #3470ff;
+  position: fixed;
+  top: 0;
+  z-index: 2;
 `;
 
 export const StyledUl = styled.ul`
+  max-width: 1152px;
   display: flex;
   justify-content: space-evenly;
 `;

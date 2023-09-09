@@ -10,19 +10,23 @@ import {
   StyledHero,
   StyledHeroP,
   StyledHomeLink,
+  StyledHeroH1,
+  StyledHeroDiv,
 } from "./Home.styled";
 import { StyledRentalCarLink } from "../../components/ModalForm/ModalForm.styled";
 
 export const Home = () => {
   return (
     <StyledContainer>
-      <StyledHero>Welcome to Our Car Rental Service! </StyledHero>
-      <StyledHeroP>
-        We provide top quality car rental service for every customer. Our fleet
-        includes a wide range of vehicle types, brands, and models to ensure
-        that you have the perfect car for your trip. Below are some of the
-        services we offer.
-      </StyledHeroP>
+      <StyledHeroDiv>
+        <StyledHeroH1>Welcome to Our Car Rental Service! </StyledHeroH1>
+        <StyledHeroP>
+          We provide top quality car rental service for every customer. Our
+          fleet includes a wide range of vehicle types, brands, and models to
+          ensure that you have the perfect car for your trip. Below are some of
+          the services we offer.
+        </StyledHeroP>
+      </StyledHeroDiv>
       <StyledServicesList>
         <StyledService>
           <StyledServiceTitle>Wide Range of Cars</StyledServiceTitle>
