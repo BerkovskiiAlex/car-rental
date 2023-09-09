@@ -5,12 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCarsThunk, loadMoreThunk } from "../../Redux/Cars/operations";
 import {
   getCars,
-  getFavorites,
+  getFavoriteStatus,
   getIsModalOpen,
 } from "../../Redux/Cars/selectors";
 import {
   StyledActiveIcon,
   StyledCarsListSpan,
+  StyledCatalogCarBrandDiv,
+  StyledCatalogCarBrandSelect,
+  StyledCatalogCarMileageDiv,
+  StyledCatalogCarMileageInputs,
+  StyledCatalogCarMileageInputsDiv,
+  StyledCatalogForm,
+  StyledCatalogLabel,
+  StyledCatalogOption,
+  StyledCatalogPriceDiv,
+  StyledCatalogPriceSelect,
+  StyledCatalogSearchButton,
+  StyledCatalogSection,
   StyledNormalIcon,
 } from "./Catalog.styled";
 import {
@@ -25,8 +37,8 @@ import makes from "../../data/makes.json";
 export const Catalog = () => {
   const dispatch = useDispatch();
   const cars = useSelector(getCars);
-  const favorites = useSelector(getFavorites);
   const isModalOpen = useSelector(getIsModalOpen);
+  const favoriteStatus = useSelector(getFavoriteStatus);
   const [currentPage, setCurrentPage] = useState(2);
   const [selectedMake, setSelectedMake] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
@@ -56,9 +68,8 @@ export const Catalog = () => {
   };
 
   const isCarInFavorites = (carId) => {
-    return favorites.some((favoriteCar) => favoriteCar.id === carId);
+    return favoriteStatus[carId];
   };
-
   const handleLearnMore = (carId) => {
     dispatch(setIsModalOpen(true));
     dispatch(addToCarModal(carId));
@@ -90,77 +101,74 @@ export const Catalog = () => {
     e.preventDefault();
 
     setFilteredCars(filterCars());
-
-    setSelectedMake("");
-    setSelectedPrice("");
-    setMileageRange({ min: "", max: "" });
   };
 
   return (
-    <section>
-      <form
-        onSubmit={handleFormSubmit}
-        style={{ display: "flex", gap: "18px" }}
-      >
-        <div style={{ display: "flex", gap: "18px" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <label htmlFor="makeFilter">Car brand</label>
-            <select
-              id="makeFilter"
-              name="makeFilter"
-              value={selectedMake}
+    <StyledCatalogSection>
+      <StyledCatalogForm onSubmit={handleFormSubmit}>
+        <StyledCatalogCarBrandDiv>
+          <StyledCatalogLabel htmlFor="makeFilter">
+            Car brand
+          </StyledCatalogLabel>
+          <StyledCatalogCarBrandSelect
+            id="makeFilter"
+            name="makeFilter"
+            value={selectedMake}
+            onChange={handleChange}
+          >
+            <StyledCatalogOption value="">All</StyledCatalogOption>
+            {makes.map((make) => (
+              <StyledCatalogOption key={make.id} value={make.name}>
+                {make.name}
+              </StyledCatalogOption>
+            ))}
+          </StyledCatalogCarBrandSelect>
+        </StyledCatalogCarBrandDiv>
+        <StyledCatalogPriceDiv>
+          <StyledCatalogLabel htmlFor="priceFilter">
+            Price/ 1 hour
+          </StyledCatalogLabel>
+          <StyledCatalogPriceSelect
+            id="priceFilter"
+            name="priceFilter"
+            value={selectedPrice}
+            onChange={handleChange}
+          >
+            <StyledCatalogOption value="">All</StyledCatalogOption>
+            {[...Array(50)].map((_, index) => (
+              <StyledCatalogOption key={index} value={(index + 1) * 10}>
+                {`To ${(index + 1) * 10}$`}
+              </StyledCatalogOption>
+            ))}
+          </StyledCatalogPriceSelect>
+        </StyledCatalogPriceDiv>
+        <StyledCatalogCarMileageDiv>
+          <StyledCatalogLabel htmlFor="minMileageRange">
+            Car mileage / km
+          </StyledCatalogLabel>
+          <StyledCatalogCarMileageInputsDiv>
+            <StyledCatalogCarMileageInputs
+              type="number"
+              id="minMileageRange"
+              name="min"
+              placeholder="Min"
+              value={mileageRange.min}
               onChange={handleChange}
-            >
-              <option value="">All</option>
-              {makes.map((make) => (
-                <option key={make.id} value={make.name}>
-                  {make.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <label htmlFor="priceFilter">Price/ 1 hour</label>
-            <select
-              id="priceFilter"
-              name="priceFilter"
-              value={selectedPrice}
+            />
+            <StyledCatalogCarMileageInputs
+              type="number"
+              id="maxMileageRange"
+              name="max"
+              placeholder="Max"
+              value={mileageRange.max}
               onChange={handleChange}
-            >
-              <option value="">All</option>
-              {[...Array(50)].map((_, index) => (
-                <option key={index} value={(index + 1) * 10}>
-                  ${(index + 1) * 10}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <label htmlFor="minMileageRange">Car mileage / km</label>
-            <div style={{ display: "flex" }}>
-              <input
-                type="number"
-                id="minMileageRange"
-                name="min"
-                placeholder="Min"
-                value={mileageRange.min}
-                onChange={handleChange}
-              />
-              <input
-                type="number"
-                id="maxMileageRange"
-                name="max"
-                placeholder="Max"
-                value={mileageRange.max}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-        </div>
-        <button type="submit">Search</button>
-      </form>
+            />
+          </StyledCatalogCarMileageInputsDiv>
+        </StyledCatalogCarMileageDiv>
+        <StyledCatalogSearchButton type="submit">
+          Search
+        </StyledCatalogSearchButton>
+      </StyledCatalogForm>
       {filteredCars.map((car) => {
         const carIsFavorite = isCarInFavorites(car.id);
         return (
@@ -198,6 +206,6 @@ export const Catalog = () => {
         <button onClick={handleLoadMore}>Load more</button>
       ) : null}
       {isModalOpen && <Modal />}
-    </section>
+    </StyledCatalogSection>
   );
 };

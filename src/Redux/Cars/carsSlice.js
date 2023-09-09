@@ -8,26 +8,22 @@ const initialState = {
   favorites: [],
   carModal: null,
   isModalOpen: false,
+  favoriteStatus: {},
 };
+
 const carsSlice = createSlice({
   name: "carsList",
   initialState,
   reducers: {
     addToFavorites: (state, { payload }) => {
-      const carIndex = state.cars.findIndex((car) => car.id === payload.car.id);
-      if (carIndex >= 0) {
-        state.cars[carIndex].isFavorite = true;
-        state.favorites = [...state.favorites, payload.car];
-      }
+      state.favoriteStatus[payload.car.id] = true;
+      state.favorites = [...state.favorites, payload.car];
     },
     removeFromFavorites: (state, { payload }) => {
-      const carIndex = state.cars.findIndex((car) => car.id === payload.car.id);
-      if (carIndex >= 0) {
-        state.cars[carIndex].isFavorite = false;
-        state.favorites = state.favorites.filter(
-          (car) => car.id !== payload.car.id
-        );
-      }
+      state.favoriteStatus[payload.car.id] = false;
+      state.favorites = state.favorites.filter(
+        (car) => car.id !== payload.car.id
+      );
     },
     setIsModalOpen: (state, { payload }) => {
       state.isModalOpen = payload;

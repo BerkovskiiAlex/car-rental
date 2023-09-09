@@ -15,3 +15,7 @@ export const getIsModalOpen = (state) => {
 export const getCarModal = (state) => {
   return state.carsList.carModal;
 };
+
+export const getFavoriteStatus = (state) => {
+  return state.carsList.favoriteStatus;
+};

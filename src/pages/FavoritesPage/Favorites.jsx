@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFavorites, getIsModalOpen } from "../../Redux/Cars/selectors";
 import {
@@ -26,6 +26,10 @@ export const Favorites = () => {
   const [mileageRange, setMileageRange] = useState({ min: "", max: "" });
 
   const [filteredFavorites, setFilteredFavorites] = useState(favorites);
+
+  useEffect(() => {
+    setFilteredFavorites(favorites);
+  }, [favorites]);
 
   const isCarInFavorites = (carId) => {
     return favorites.some((favoriteCar) => favoriteCar.id === carId);
@@ -135,7 +139,7 @@ export const Favorites = () => {
             </div>
           </div>
         </div>
-        <button type="submit">Filter favorites</button>
+        <button type="submit">Search</button>
       </form>
       {favorites.length === 0 ? (
         <h1>No cars found in favorites.</h1>
