@@ -12,28 +12,21 @@ import {
   StyledModalFunctionalitiesListP,
   StyledModalImg,
   StyledModalMontserratAgeSpan,
-  StyledModalMontserratP,
   StyledModalMontserratSpan,
-  StyledModalP,
   StyledModalRentalConditionsDiv,
   StyledModalRentalConditionsListP,
   StyledModalRentalConditionsP,
   StyledModalSection,
   StyledModalTypeP,
-  StyledRentalCar,
   StyledRentalCarLink,
 } from "./ModalForm.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsModalClose } from "../../Redux/Cars/carsSlice";
 import { getCarModal } from "../../Redux/Cars/selectors";
 import {
-  StyledAdressP,
-  StyledCardMarkDiv,
   StyledCardMarkH2,
-  StyledCardMarkP,
   StyledCardMarkSpan,
   StyledMachineDescriptionSpan,
-  StyledTypeP,
 } from "../../pages/CatalogPage/Catalog.styled";
 
 export const ModalForm = () => {
