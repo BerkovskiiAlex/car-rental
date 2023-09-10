@@ -61,10 +61,6 @@ export const Catalog = () => {
     dispatch(addToCarModal(carId));
   };
 
-  const handleSubmit = (filteredCars) => {
-    setFilteredCars(filteredCars);
-  };
-
   return (
     <StyledSection>
       <FilterForm cars={cars} onSubmitFilter={setFilteredCars} />

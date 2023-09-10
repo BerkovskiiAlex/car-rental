@@ -18,7 +18,7 @@ import {
   StyledCarMileageRightInput,
 } from "../pages/CatalogPage/Catalog.styled";
 
-const FilterForm = ({ onSubmitFilter, cars }) => {
+const FilterForm = ({ cars, onSubmitFilter }) => {
   const [selectedMake, setSelectedMake] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [mileageRange, setMileageRange] = useState({ min: "", max: "" });
