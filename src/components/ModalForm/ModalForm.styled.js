@@ -146,4 +146,11 @@ export const StyledRentalCarLink = styled.a`
     text-decoration: none;
     color: #fff;
   }
+
+  @media screen and (max-width: 1023px) {
+    font-size: 12px;
+  }
+  @media screen and (max-width: 767px) {
+    font-size: 10px;
+  }
 `;

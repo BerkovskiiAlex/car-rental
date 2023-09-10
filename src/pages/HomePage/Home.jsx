@@ -12,6 +12,7 @@ import {
   StyledHeroH1,
   StyledHeroDiv,
 } from "./Home.styled";
+import { StyledRentalCarLink } from "../../components/ModalForm/ModalForm.styled";
 
 export const Home = () => {
   return (
@@ -41,7 +42,9 @@ export const Home = () => {
             address any inquiries or issues you might encounter. Your
             satisfaction is our utmost priority.
           </StyledServiceDescription>
-          <StyledHomeLink href="tel:+380730000000">Contact us</StyledHomeLink>
+          <StyledRentalCarLink href="tel:+380730000000">
+            Contact us
+          </StyledRentalCarLink>
         </StyledService>
         <StyledService>
           <StyledServiceTitle>Flexible Rental Periods</StyledServiceTitle>
