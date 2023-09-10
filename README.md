@@ -11,6 +11,8 @@ Extensive catalog of vehicles, including sedans, SUVs, luxury, and sports cars.
 Advanced filtering options to find the perfect car based on make, price, and mileage.
 A favorites section where users can save their preferred vehicles for future reference.
 
+Responsive design for a seamless experience across devices.
+
 Getting Started:
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 

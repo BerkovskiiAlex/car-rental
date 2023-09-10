@@ -10,6 +10,8 @@ export const StyledModalSection = styled.section`
   box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
   width: 541px;
   min-height: 752px;
+  @media screen and (max-width: 560px) {
+  }
 `;
 
 export const StyledCloseIcon = styled(CloseIcon)`
@@ -24,6 +26,9 @@ export const StyledModalDiv = styled.div`
   justify-content: center;
   align-items: flex-start;
   margin: 40px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `;
 
 export const StyledModalImg = styled.img`
@@ -44,12 +49,12 @@ export const StyledModalCardMarkDiv = styled.div`
 `;
 
 export const StyledModalAdressP = styled.p`
-  width: 461px;
+  max-width: 461px;
   margin-top: 8px;
 `;
 
 export const StyledModalTypeP = styled.p`
-  width: 461px;
+  max-width: 461px;
   margin-top: 4px;
 `;
 

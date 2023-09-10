@@ -15,7 +15,7 @@ export const StyledNav = styled.nav`
 `;
 
 export const StyledUl = styled.ul`
-  max-width: 1152px;
+  max-width: 1440px;
   display: flex;
   justify-content: space-evenly;
 `;

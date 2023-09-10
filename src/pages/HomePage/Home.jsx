@@ -7,7 +7,6 @@ import {
   StyledService,
   StyledServiceTitle,
   StyledServiceDescription,
-  StyledHero,
   StyledHeroP,
   StyledHomeLink,
   StyledHeroH1,

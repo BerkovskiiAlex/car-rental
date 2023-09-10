@@ -1,25 +1,32 @@
 /** @format */
 
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { ReactComponent as normalIcon } from "../../images/normal.svg";
 import { ReactComponent as activeIcon } from "../../images/active.svg";
 
 export const StyledSection = styled.section`
-  width: 1184px;
-  margin: 150px 128px;
+  max-width: 1440px;
+  margin: 150px auto;
   background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 export const StyledForm = styled.form`
   display: flex;
-  width: 860px;
+  max-width: 860px;
   height: 74px;
   align-items: flex-end;
   gap: 18px;
   flex-shrink: 0;
+
+  @media screen and (max-width: 860px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const StyledCarBrandDiv = styled.div`
@@ -141,12 +148,18 @@ export const StyledSearchButton = styled.button`
 `;
 
 export const StyledCardsListDiv = styled.div`
-  width: 1184px;
+  max-width: 1220px;
   display: flex;
   flex-wrap: wrap;
   row-gap: 50px;
   column-gap: 28px;
   margin-top: 50px;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 860px) {
+    margin-top: 300px;
+  }
 `;
 
 export const StyledFullCardDiv = styled.div`
