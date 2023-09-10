@@ -42,9 +42,7 @@ export const Home = () => {
             address any inquiries or issues you might encounter. Your
             satisfaction is our utmost priority.
           </StyledServiceDescription>
-          <StyledRentalCarLink href="tel:+380730000000">
-            Contact us
-          </StyledRentalCarLink>
+          <StyledHomeLink href="tel:+380730000000">Contact us</StyledHomeLink>
         </StyledService>
         <StyledService>
           <StyledServiceTitle>Flexible Rental Periods</StyledServiceTitle>
