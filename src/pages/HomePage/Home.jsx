@@ -12,7 +12,6 @@ import {
   StyledHeroH1,
   StyledHeroDiv,
 } from "./Home.styled";
-import { StyledRentalCarLink } from "../../components/ModalForm/ModalForm.styled";
 
 export const Home = () => {
   return (
