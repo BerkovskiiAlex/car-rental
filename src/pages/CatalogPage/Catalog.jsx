@@ -67,7 +67,7 @@ export const Catalog = () => {
 
   return (
     <StyledSection>
-      <FilterForm cars={cars} onSubmitFilter={handleSubmit} />
+      <FilterForm cars={cars} onSubmitFilter={setFilteredCars} />
       <StyledCardsListDiv>
         {filteredCars.map((car) => {
           const carIsFavorite = isCarInFavorites(car.id);
@@ -82,7 +82,7 @@ export const Catalog = () => {
           );
         })}
       </StyledCardsListDiv>
-      {currentPage <= 5 ? (
+      {currentPage <= 6 ? (
         <StyledLoadMoreButton onClick={handleLoadMore}>
           Load more
         </StyledLoadMoreButton>
