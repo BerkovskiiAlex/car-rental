@@ -9,7 +9,6 @@ import {
   getIsModalOpen,
 } from "../../Redux/Cars/selectors";
 import {
-  StyledActiveIcon,
   StyledCarBrandDiv,
   StyledCarBrandSelect,
   StyledCarMileageDiv,
@@ -21,19 +20,6 @@ import {
   StyledPriceSelect,
   StyledSearchButton,
   StyledSection,
-  StyledNormalIcon,
-  StyledCardDiv,
-  StyledFullCardDiv,
-  StyledImages,
-  StyledImage,
-  StyledCardMarkDiv,
-  StyledCardMarkH2,
-  StyledCardMarkSpan,
-  StyledCardMarkP,
-  StyledMachineDescriptionSpan,
-  StyledAdressP,
-  StyledTypeP,
-  StyledLearnMoreButton,
   StyledCardsListDiv,
   StyledCarMileageRightInput,
   StyledCarMileageLeftInput,
@@ -47,6 +33,7 @@ import {
 } from "../../Redux/Cars/carsSlice";
 import Modal from "../../components/Modal/Modal";
 import makes from "../../data/makes.json";
+import { CarCard } from "../../data/CarCard";
 
 export const Catalog = () => {
   const dispatch = useDispatch();
@@ -57,9 +44,7 @@ export const Catalog = () => {
   const [selectedMake, setSelectedMake] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [mileageRange, setMileageRange] = useState({ min: "", max: "" });
-
   const [filteredCars, setFilteredCars] = useState(cars);
-
   const [userInputs, setUserInputs] = useState({ min: "From ", max: "To " });
 
   useEffect(() => {
@@ -195,58 +180,13 @@ export const Catalog = () => {
         {filteredCars.map((car) => {
           const carIsFavorite = isCarInFavorites(car.id);
           return (
-            <StyledFullCardDiv key={car.id}>
-              <StyledCardDiv>
-                <StyledImages>
-                  <StyledImage src={car.img} alt={car.description} />
-                  {carIsFavorite ? (
-                    <StyledActiveIcon
-                      onClick={() => toggleFavorite(car, carIsFavorite)}
-                    />
-                  ) : (
-                    <StyledNormalIcon
-                      onClick={() => toggleFavorite(car, carIsFavorite)}
-                    />
-                  )}
-                </StyledImages>
-                <StyledCardMarkDiv>
-                  <StyledCardMarkH2>
-                    {car.make}{" "}
-                    <StyledCardMarkSpan>{car.model}</StyledCardMarkSpan>,{" "}
-                    {car.year}
-                  </StyledCardMarkH2>
-                  <StyledCardMarkP>${car.rentalPrice}</StyledCardMarkP>
-                </StyledCardMarkDiv>
-                <StyledAdressP>
-                  <StyledMachineDescriptionSpan>
-                    {car.city}
-                  </StyledMachineDescriptionSpan>
-                  <StyledMachineDescriptionSpan>
-                    {car.country}
-                  </StyledMachineDescriptionSpan>
-                  <StyledMachineDescriptionSpan>
-                    {car.rentalCompany}
-                  </StyledMachineDescriptionSpan>
-                </StyledAdressP>
-                <StyledTypeP>
-                  <StyledMachineDescriptionSpan>
-                    {car.type}
-                  </StyledMachineDescriptionSpan>
-                  <StyledMachineDescriptionSpan>
-                    {car.model}
-                  </StyledMachineDescriptionSpan>
-                  <StyledMachineDescriptionSpan>
-                    {car.id}
-                  </StyledMachineDescriptionSpan>
-                  <StyledMachineDescriptionSpan>
-                    {car.accessories[0]}
-                  </StyledMachineDescriptionSpan>
-                </StyledTypeP>
-              </StyledCardDiv>
-              <StyledLearnMoreButton onClick={() => handleLearnMore(car.id)}>
-                Learn more
-              </StyledLearnMoreButton>
-            </StyledFullCardDiv>
+            <CarCard
+              key={car.id}
+              car={car}
+              carIsFavorite={carIsFavorite}
+              onToggleFavorite={() => toggleFavorite(car, carIsFavorite)}
+              onLearnMore={() => handleLearnMore(car.id)}
+            />
           );
         })}
       </StyledCardsListDiv>
