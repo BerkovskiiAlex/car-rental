@@ -58,7 +58,9 @@ const FilterForm = ({ cars, onSubmitFilter }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     onSubmitFilter(filterCars());
+  };
 
+  const handleReset = (e) => {
     setSelectedMake("");
     setSelectedPrice("");
     setMileageRange({ min: "", max: "" });
@@ -121,6 +123,9 @@ const FilterForm = ({ cars, onSubmitFilter }) => {
         </StyledCarMileageInputsDiv>
       </StyledCarMileageDiv>
       <StyledSearchButton type="submit">Search</StyledSearchButton>
+      <StyledSearchButton type="submit" onClick={handleReset}>
+        Reset
+      </StyledSearchButton>
     </StyledForm>
   );
 };

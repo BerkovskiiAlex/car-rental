@@ -17,13 +17,13 @@ export const StyledSection = styled.section`
 
 export const StyledForm = styled.form`
   display: flex;
-  max-width: 860px;
+  max-width: 1014px;
   height: 74px;
   align-items: flex-end;
   gap: 18px;
   flex-shrink: 0;
 
-  @media screen and (max-width: 860px) {
+  @media screen and (max-width: 1014px) {
     flex-direction: column;
     align-items: center;
   }
@@ -157,8 +157,8 @@ export const StyledCardsListDiv = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media screen and (max-width: 860px) {
-    margin-top: 300px;
+  @media screen and (max-width: 1014px) {
+    margin-top: 360px;
   }
 `;
 
