@@ -162,7 +162,7 @@ export const StyledCardsListDiv = styled.div`
   }
 `;
 
-export const StyledFullCardDiv = styled.div`
+export const StyledFullCardUl = styled.ul`
   display: flex;
   width: 274px;
   height: 426px;
@@ -171,7 +171,7 @@ export const StyledFullCardDiv = styled.div`
   flex-shrink: 0;
 `;
 
-export const StyledCardDiv = styled.div`
+export const StyledCardLi = styled.li`
   display: flex;
   width: 274px;
   height: 354px;

@@ -3,12 +3,12 @@
 import {
   StyledActiveIcon,
   StyledAdressP,
-  StyledCardDiv,
+  StyledCardLi,
   StyledCardMarkDiv,
   StyledCardMarkH2,
   StyledCardMarkP,
   StyledCardMarkSpan,
-  StyledFullCardDiv,
+  StyledFullCardUl,
   StyledImage,
   StyledImages,
   StyledLearnMoreButton,
@@ -24,8 +24,8 @@ export const CarCard = ({
   onLearnMore,
 }) => {
   return (
-    <StyledFullCardDiv>
-      <StyledCardDiv>
+    <StyledFullCardUl>
+      <StyledCardLi>
         <StyledImages>
           <StyledImage src={car.img} alt={car.description} />
           {carIsFavorite ? (
@@ -68,10 +68,10 @@ export const CarCard = ({
             {car.accessories[0]}
           </StyledMachineDescriptionSpan>
         </StyledTypeP>
-      </StyledCardDiv>
+      </StyledCardLi>
       <StyledLearnMoreButton onClick={() => onLearnMore(car.id)}>
         Learn more
       </StyledLearnMoreButton>
-    </StyledFullCardDiv>
+    </StyledFullCardUl>
   );
 };
