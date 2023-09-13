@@ -147,7 +147,7 @@ export const StyledSearchButton = styled.button`
   line-height: 20px;
 `;
 
-export const StyledCardsListDiv = styled.div`
+export const StyledCardsListUl = styled.ul`
   max-width: 1220px;
   display: flex;
   flex-wrap: wrap;
@@ -162,7 +162,7 @@ export const StyledCardsListDiv = styled.div`
   }
 `;
 
-export const StyledFullCardUl = styled.ul`
+export const StyledFullCardDiv = styled.div`
   display: flex;
   width: 274px;
   height: 426px;

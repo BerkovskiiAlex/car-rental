@@ -19,8 +19,8 @@ import { CarCard } from "../../data/CarCard";
 import FilterForm from "../../data/FilterForm";
 import {
   StyledSection,
-  StyledCardsListDiv,
   StyledLoadMoreButton,
+  StyledCardsListUl,
 } from "./Catalog.styled";
 
 export const Catalog = () => {
@@ -64,7 +64,7 @@ export const Catalog = () => {
   return (
     <StyledSection>
       <FilterForm cars={cars} onSubmitFilter={setFilteredCars} />
-      <StyledCardsListDiv>
+      <StyledCardsListUl>
         {filteredCars.map((car) => {
           const carIsFavorite = isCarInFavorites(car.id);
           return (
@@ -77,7 +77,7 @@ export const Catalog = () => {
             />
           );
         })}
-      </StyledCardsListDiv>
+      </StyledCardsListUl>
       {currentPage <= 6 ? (
         <StyledLoadMoreButton onClick={handleLoadMore}>
           Load more

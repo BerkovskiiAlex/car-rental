@@ -11,7 +11,7 @@ import {
 } from "../../Redux/Cars/carsSlice";
 import {
   StyledSection,
-  StyledCardsListDiv,
+  StyledCardsListUl,
 } from "../CatalogPage/Catalog.styled";
 import Modal from "../../components/Modal/Modal";
 import { CarCard } from "../../data/CarCard";
@@ -48,7 +48,7 @@ export const Favorites = () => {
   return (
     <StyledSection>
       <FilterForm cars={favorites} onSubmitFilter={setFilteredFavorites} />
-      <StyledCardsListDiv>
+      <StyledCardsListUl>
         {filteredFavorites.map((car) => {
           const carIsFavorite = isCarInFavorites(car.id);
           return (
@@ -61,7 +61,7 @@ export const Favorites = () => {
             />
           );
         })}
-      </StyledCardsListDiv>
+      </StyledCardsListUl>
       {isModalOpen && <Modal />}
     </StyledSection>
   );

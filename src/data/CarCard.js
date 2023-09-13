@@ -8,7 +8,7 @@ import {
   StyledCardMarkH2,
   StyledCardMarkP,
   StyledCardMarkSpan,
-  StyledFullCardUl,
+  StyledFullCardDiv,
   StyledImage,
   StyledImages,
   StyledLearnMoreButton,
@@ -24,7 +24,7 @@ export const CarCard = ({
   onLearnMore,
 }) => {
   return (
-    <StyledFullCardUl>
+    <StyledFullCardDiv>
       <StyledCardLi>
         <StyledImages>
           <StyledImage src={car.img} alt={car.description} />
@@ -69,9 +69,11 @@ export const CarCard = ({
           </StyledMachineDescriptionSpan>
         </StyledTypeP>
       </StyledCardLi>
-      <StyledLearnMoreButton onClick={() => onLearnMore(car.id)}>
-        Learn more
-      </StyledLearnMoreButton>
-    </StyledFullCardUl>
+      <li>
+        <StyledLearnMoreButton onClick={() => onLearnMore(car.id)}>
+          Learn more
+        </StyledLearnMoreButton>
+      </li>
+    </StyledFullCardDiv>
   );
 };
